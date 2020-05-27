@@ -34,7 +34,7 @@ public class StatisticaDAO {
     String VIEW_BY_ANNO_CIRCODOMICILIO= "SELECT ID_Statistica, Anno, Corrente,ID_CircoDomicilio, Tipo_Appartenenza, ID_CircoAppartenenza,"
             + " ID_Nazione,Domii, Episcopi, Sacerdoti_ProfPerp, Sacerdoti_ProfTemp,DiacPerm_ProfPerp,DiacPerm_ProfTemp,"
             + " DiacTrans_ProfPerp, DiacTrans_ProfTemp, Laici_ProfPerp, Laici_ProfTemp, Novicii, Postulantes, "
-            + "Tertiarii_Perpetui, Seminaristi, c.Nome_latino "
+            + "Tertiarii_Perpetui, Seminaristi "
             + "FROM statistica_ordinis"
             + " WHERE Anno = ? AND ID_CircoDomicilio = ? ";
     

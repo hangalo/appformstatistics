@@ -45,236 +45,218 @@
         </style>
     </h:head>
 
-
-
-
-
-
-
     <h:body>
-        <h:form>
-            <h:panelGrid columns="6">
-                <h:panelGrid columns="1">
-                    <p:outputLabel value="Circoscrizione:"/>
-                    <p:outputLabel id="circNome" value="#{loginCDIBean.userLoged.user.circoscrizioni}"/>
-                </h:panelGrid>
+
+        <h:form id="form">
+
+            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+
+            <h3 style="margin-top:0">Basic</h3>
+            <p:tabView id="tabViewData">
+
+                <p:tab title="New Data">
+                  
+           <h:form id="formDataTable">
+            <p:growl id="msgs2" showDetail="true"/>
+
+            <p:dataTable id="statistica" var="st" value="#{statisticaOrdinisBean.statisticaOrdinis}" editable="true" editMode="cell" widgetVar="cellStatistica">
+
+
+                <p:ajax event="cellEdit" listener="#{statisticaOrdinisBean.onCellEdit}" update=":form" />
+
+
+                <!-- Start Header -->
+
+                <p:columnGroup type="header">
+                    <p:row>
+                        <p:column rowspan="3" headerText="Circoscrizione" style="width: 15%; text-align: center"/>
+                        <p:column colspan="5" headerText="PROFESSI PERPETUI" />
+                        <p:column colspan="4" headerText="PROFESSI TEMPORANEI" />
+                        <p:column colspan="3" headerText="NON PROFESSI" />
+                    </p:row>
+
+                    <p:row>
+                        <p:column headerText="Episcopi" />
+                        <p:column headerText="Sacerdotes" />
+                        <p:column headerText="Diaconi permanentes" />
+                        <p:column headerText="Diaconi transeuntes" />
+                        <p:column headerText="Laici" />
+
+                        <p:column headerText="Sacerdotes" />
+                        <p:column headerText="Diaconi permanentes" />
+                        <p:column headerText="Diaconi transeuntes" />
+                        <p:column headerText="Laici" />
+
+
+                        <!-- NON PROFESSI -->
+                        <p:column headerText="Novicii" />
+                        <p:column headerText="Postulantes" />
+                        <p:column headerText="Tertiarii perpetui" />
+
+                    </p:row>
+                </p:columnGroup>
+
+                <!-- Start Header -->
 
 
 
+                <p:column headerText="Circoscrizione" style="width: 20%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.circoscrizioni}" /></f:facet>
+                        <f:facet name="input">
+                            <p:selectOneMenu value="#{st.circoscrizioni}" style="width:100%"  filter = "true" filterMatchMode = "startsWith" >
+                                <f:selectItems value="#{circoscrizioniBean.circoscrizionis}" var="circoscrizioni" itemLabel="#{circoscrizioni}" itemValue="#{circoscrizioni.idCircoscrizione}" />
+                            </p:selectOneMenu>
 
-                <h:panelGrid columns="1">
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
 
-                    <p:commandButton value="Logout" action="#{loginCDIBean.logout()}" />
-                    <h:panelGroup/>
+                <p:column headerText="Episcopi" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.episcopi}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{st.episcopi}" style="width:96%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
 
-                </h:panelGrid>
+                <p:column headerText="Sacerdotes" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.sacerdotiProfPerp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.sacerdotiProfPerp}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Diaconi permanenti" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.diacPermProfPerp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.diacPermProfPerp}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Diaconi transeuntes" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.diacTransProfPerp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.diacTransProfPerp}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Laici" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.laiciProfPerp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.laiciProfPerp}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <!-- PROFESSI TEMPORANEI-->
+                <p:column headerText="Sacerdotes" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.sacerdotiProfTemp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.sacerdotiProfTemp}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Diaconi permanentes" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.diacPermProfTemp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.diacPermProfTemp}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Diaconi transeuntes" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.diacTransProfTemp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.diacTransProfTemp}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
 
 
+                <p:column headerText="Laici" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.laiciProfTemp}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.laiciProfTemp}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
 
+                <!-- NON PROFESSI -->
 
-            </h:panelGrid>
+                <p:column headerText="Novicii" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.novicii}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.novicii}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Postulantes" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.postulantes}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.postulantes}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Tertiarii perpetui" style="width: 10%; text-align: center">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{st.tertiariiPerpetui}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{st.tertiariiPerpetui}" style="width:96%" label="Year"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:columnGroup type="footer">
+                    <p:row>
+                        <p:column colspan="1" style="text-align:right" footerText="Totals:" />
+                        <p:column footerText="#{statisticaOrdinisBean.episcopiPerpetui}" />
+                        <p:column footerText="#{statisticaOrdinisBean.sacerdotesPerpetui}" />
+                        <p:column footerText="#{statisticaOrdinisBean.diaconiPermanentePerpetui}" />
+                        <p:column footerText="#{statisticaOrdinisBean.diaconiTranseuntesPerpetui}" />
+                        <p:column footerText="#{statisticaOrdinisBean.laiciPerpetui}" />
+                        <!-- Temporanei -->
+                        <p:column footerText="#{statisticaOrdinisBean.sacerdotesTemporanei}" />
+                        <p:column footerText="#{statisticaOrdinisBean.diaconiPermanenteTemporanei}" />
+                        <p:column footerText="#{statisticaOrdinisBean.diaconiTranseuntesTemporanei}" />
+                        <p:column footerText="#{statisticaOrdinisBean.laiciTemporanei}" />
+                        <!-- Non professi -->
+                        <p:column footerText="#{statisticaOrdinisBean.novicii}" />
+                        <p:column footerText="#{statisticaOrdinisBean.postulantes}" />
+                        <p:column footerText="#{statisticaOrdinisBean.tertiariiPerpetui}" />
+                    </p:row>
+                </p:columnGroup>
+
+            </p:dataTable>
+
+            <p:contextMenu for="statistica" widgetVar="cMenu">   
+                <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellStatistica').showCellEditor();return false;"/>  
+                <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
+            </p:contextMenu> 
         </h:form>
 
+        
+            <p:commandButton actionListener="#{statisticaOrdinisBean.newLine}"  value="Nuova Riga"  ajax="true" />
 
 
+     
+       
+            <p:commandButton action="#{statisticaOrdinisBean.saveStatistics}"  value="Savare"  ajax="false" />
 
+     
+               
+                    
+                    
+                    
+                    
+                    
+                </p:tab>
 
+                <p:tab title="May Data">
+                    <p:outputLabel value="Circoscrizione:" style="font-size: 2em;"/>
+                    <p:outputLabel id="circoNomeMyData" value="#{loginCDIBean.userLoged.user.circoscrizioni}" style="font-size: 2em;"/>
 
-        <p:tabView>
+                    <p:growl id="msgsformtDataModify" showDetail="true" skipDetailIfEqualsSummary="true" />
 
-            <p:tab title="New Data">
-
-                   <h:form id="formtDataModify">
-                     <p:growl id="msgsformtDataModify" showDetail="true" skipDetailIfEqualsSummary="true" />
-                <p:dataTable id="statistica" var="st" value="#{statisticaOrdinisBean.statisticaNewOrdinis}" editable="true" editMode="cell" widgetVar="cellStatistica">
-
-
-               <!--     <p:ajax event="cellEdit" listener="#{statisticaOrdinisBean.onCellEdit}" update=":formtDataCirco:msgsformtDataCirco" />-->
-
-
-                    <!-- Start Header -->
-
-                    <p:columnGroup type="header">
-                        <p:row>
-                            <p:column rowspan="3" headerText="Circoscrizione" style="width: 15%; text-align: center"/>
-                            <p:column colspan="5" headerText="PROFESSI PERPETUI" />
-                            <p:column colspan="4" headerText="PROFESSI TEMPORANEI" />
-                            <p:column colspan="3" headerText="NON PROFESSI" />
-                        </p:row>
-
-                        <p:row>
-                            <p:column headerText="Episcopi" />
-                            <p:column headerText="Sacerdotes" />
-                            <p:column headerText="Diaconi permanentes" />
-                            <p:column headerText="Diaconi transeuntes" />
-                            <p:column headerText="Laici" />
-
-                            <p:column headerText="Sacerdotes" />
-                            <p:column headerText="Diaconi permanentes" />
-                            <p:column headerText="Diaconi transeuntes" />
-                            <p:column headerText="Laici" />
-
-
-                            <!-- NON PROFESSI -->
-                            <p:column headerText="Novicii" />
-                            <p:column headerText="Postulantes" />
-                            <p:column headerText="Tertiarii perpetui" />
-
-                        </p:row>
-                    </p:columnGroup>
-
-                    <!-- Start Header -->
-
-
-
-                    <p:column headerText="Circoscrizione" style="width: 20%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.circoscrizioni}" /></f:facet>
-                            <f:facet name="input">
-                                <p:selectOneMenu value="#{st.circoscrizioni}" style="width:100%"  filter = "true" filterMatchMode = "startsWith" >
-                                    <f:selectItems value="#{circoscrizioniBean.circoscrizionis}" var="circoscrizioni" itemLabel="#{circoscrizioni}" itemValue="#{circoscrizioni.idCircoscrizione}" />
-                                </p:selectOneMenu>
-
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Episcopi" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.episcopi}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="modelInput" value="#{st.episcopi}" style="width:96%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Sacerdotes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.sacerdotiProfPerp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.sacerdotiProfPerp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Diaconi permanenti" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.diacPermProfPerp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.diacPermProfPerp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Diaconi transeuntes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.diacTransProfPerp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.diacTransProfPerp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Laici" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.laiciProfPerp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.laiciProfPerp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <!-- PROFESSI TEMPORANEI-->
-                    <p:column headerText="Sacerdotes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.sacerdotiProfTemp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.sacerdotiProfTemp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Diaconi permanentes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.diacPermProfTemp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.diacPermProfTemp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Diaconi transeuntes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.diacTransProfTemp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.diacTransProfTemp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-
-                    <p:column headerText="Laici" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.laiciProfTemp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.laiciProfTemp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <!-- NON PROFESSI -->
-
-                    <p:column headerText="Novicii" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.novicii}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.novicii}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Postulantes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.postulantes}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.postulantes}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Tertiarii perpetui" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.tertiariiPerpetui}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.tertiariiPerpetui}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:columnGroup type="footer">
-                        <p:row>
-                            <p:column colspan="1" style="text-align:right" footerText="Totals:" />
-                            <p:column footerText="#{statisticaOrdinisBean.episcopiPerpetui}" />
-                            <p:column footerText="#{statisticaOrdinisBean.sacerdotesPerpetui}" />
-                            <p:column footerText="#{statisticaOrdinisBean.diaconiPermanentePerpetui}" />
-                            <p:column footerText="#{statisticaOrdinisBean.diaconiTranseuntesPerpetui}" />
-                            <p:column footerText="#{statisticaOrdinisBean.laiciPerpetui}" />
-                            <!-- Temporanei -->
-                            <p:column footerText="#{statisticaOrdinisBean.sacerdotesTemporanei}" />
-                            <p:column footerText="#{statisticaOrdinisBean.diaconiPermanenteTemporanei}" />
-                            <p:column footerText="#{statisticaOrdinisBean.diaconiTranseuntesTemporanei}" />
-                            <p:column footerText="#{statisticaOrdinisBean.laiciTemporanei}" />
-                            <!-- Non professi -->
-                            <p:column footerText="#{statisticaOrdinisBean.novicii}" />
-                            <p:column footerText="#{statisticaOrdinisBean.postulantes}" />
-                            <p:column footerText="#{statisticaOrdinisBean.tertiariiPerpetui}" />
-                        </p:row>
-                    </p:columnGroup>
-
-                </p:dataTable>
-
-                <p:contextMenu for="statistica" widgetVar="cMenu">   
-                    <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellStatistica').showCellEditor();return false;"/>  
-                    <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
-                </p:contextMenu> 
-                </h:form>
-
-             
-
-
-
-
-            </p:tab>
-            <p:tab title="My Data">
-
-                <h:form id="formMyData">
-
-
-                    <p:dataTable id="statistica" var="st" value="#{loginCDIBean.statisticaOrdinisCircoscrizionis}" editable="true" editMode="cell" widgetVar="cellStatistica">
-
-
-                <!--        <p:ajax event="cellEdit" listener="#{statisticaOrdinisBean.onCellEdit}" update=":form:msgs" /> -->
-
+                    <p:dataTable id="statisticaMyDataTable" var="st" value="#{loginCDIBean.statisticaOrdinisCircoscrizionis}"  widgetVar="cellStatistica">
 
                         <!-- Start Header -->
 
                         <p:columnGroup type="header">
                             <p:row>
                                 <p:column rowspan="3" headerText="Circoscrizione" style="width: 15%; text-align: center"/>
+                                <p:column rowspan="3" headerText="Anno" style="width: 15%; text-align: center"/>
                                 <p:column colspan="5" headerText="PROFESSI PERPETUI" />
                                 <p:column colspan="4" headerText="PROFESSI TEMPORANEI" />
                                 <p:column colspan="3" headerText="NON PROFESSI" />
@@ -306,106 +288,81 @@
 
 
                         <p:column headerText="Circoscrizione" style="width: 20%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.circoscrizioni}" /></f:facet>
-                                <f:facet name="input">
-                                    <p:selectOneMenu value="#{st.circoscrizioni}" style="width:100%"  filter = "true" filterMatchMode = "startsWith" >
-                                        <f:selectItems value="#{circoscrizioniBean.circoscrizionis}" var="circoscrizioni" itemLabel="#{circoscrizioni}" itemValue="#{circoscrizioni.idCircoscrizione}" />
-                                    </p:selectOneMenu>
-
-                                </f:facet>
-                            </p:cellEditor>
+                            <h:outputText value="#{st.circoscrizioni.idCircoscrizione}" />
+                        </p:column>
+                        <p:column headerText="Anno" style="width: 20%; text-align: center">
+                            <h:outputText value="#{st.anno}" />
                         </p:column>
 
                         <p:column headerText="Episcopi" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.episcopi}" /></f:facet>
-                                <f:facet name="input"><p:inputText id="modelInput" value="#{st.episcopi}" style="width:96%"/></f:facet>
-                            </p:cellEditor>
+                            <h:outputText value="#{st.episcopi}" />
+
                         </p:column>
 
                         <p:column headerText="Sacerdotes" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.sacerdotiProfPerp}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.sacerdotiProfPerp}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+
+                            <h:outputText value="#{st.sacerdotiProfPerp}" />
+
                         </p:column>
 
                         <p:column headerText="Diaconi permanenti" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.diacPermProfPerp}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.diacPermProfPerp}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+                            <h:outputText value="#{st.diacPermProfPerp}" />
+
                         </p:column>
 
                         <p:column headerText="Diaconi transeuntes" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.diacTransProfPerp}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.diacTransProfPerp}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+                            <h:outputText value="#{st.diacTransProfPerp}" />
+
                         </p:column>
                         <p:column headerText="Laici" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.laiciProfPerp}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.laiciProfPerp}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+                            <h:outputText value="#{st.laiciProfPerp}" />
+
                         </p:column>
                         <!-- PROFESSI TEMPORANEI-->
                         <p:column headerText="Sacerdotes" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.sacerdotiProfTemp}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.sacerdotiProfTemp}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+                            <h:outputText value="#{st.sacerdotiProfTemp}" />
+
                         </p:column>
 
                         <p:column headerText="Diaconi permanentes" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.diacPermProfTemp}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.diacPermProfTemp}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+                            <h:outputText value="#{st.diacPermProfTemp}" />
+
                         </p:column>
 
                         <p:column headerText="Diaconi transeuntes" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.diacTransProfTemp}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.diacTransProfTemp}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+                            <h:outputText value="#{st.diacTransProfTemp}" />
+
                         </p:column>
 
 
                         <p:column headerText="Laici" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.laiciProfTemp}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.laiciProfTemp}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+                            <h:outputText value="#{st.laiciProfTemp}" />
+
                         </p:column>
 
                         <!-- NON PROFESSI -->
 
                         <p:column headerText="Novicii" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.novicii}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.novicii}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+
+                            <h:outputText value="#{st.novicii}" style="width:96%" />
                         </p:column>
 
                         <p:column headerText="Postulantes" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.postulantes}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.postulantes}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+
+                            <h:outputText value="#{st.postulantes}" style="width:96%" />
+
                         </p:column>
 
                         <p:column headerText="Tertiarii perpetui" style="width: 10%; text-align: center">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{st.tertiariiPerpetui}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{st.tertiariiPerpetui}" style="width:96%" label="Year"/></f:facet>
-                            </p:cellEditor>
+
+                            <h:outputText value="#{st.tertiariiPerpetui}" style="width:96%" />
+
                         </p:column>
 
                         <p:columnGroup type="footer">
                             <p:row>
                                 <p:column colspan="1" style="text-align:right" footerText="Totals:" />
+                                <p:column footerText="#" />
                                 <p:column footerText="#{statisticaOrdinisBean.episcopiPerpetui}" />
                                 <p:column footerText="#{statisticaOrdinisBean.sacerdotesPerpetui}" />
                                 <p:column footerText="#{statisticaOrdinisBean.diaconiPermanentePerpetui}" />
@@ -425,223 +382,173 @@
 
                     </p:dataTable>
 
-                    <p:contextMenu for="statistica" widgetVar="cMenu">   
-                        <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellStatistica').showCellEditor();return false;"/>  
-                        <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
-                    </p:contextMenu> 
-                </h:form>
-
-                <h:form>
-            
-
-                </h:form>
-                <h:form>
-          
-                </h:form>
-
-            </p:tab>
-
-            <p:tab title="Data by Date and Circoscrizione" id="tabDataCirco">
-
-
-                <h:form id="formDataCirsco" >
-
-                    <p:growl id="msgsMydata" showDetail="true" skipDetailIfEqualsSummary="true" />
-
-
-
-                    <p:outputLabel value="Circoscrizione:"/>
-                    <p:outputLabel id="circNome" value="#{loginCDIBean.userLoged.user.circoscrizioni}"/>
-
-
-                    <p:outputLabel value="Anno:"/>
-                    <p:calendar value="#{loginCDIBean.date}" pattern="dd/MM/yyyy" size="9" >
-                        <p:ajax event="dateSelect" listener="#{loginCDIBean.onDateSelect}" update="msgsMydata" />
-                    </p:calendar>
-
-
-                    <h:inputHidden id="circo" value="#{loginCDIBean.userLoged.user.circoscrizioni.idCircoscrizione}"/>
-
-                </h:form>
-                <h:form id="formtDataCirco">
-                     <p:growl id="msgsformtDataCirco" showDetail="true" skipDetailIfEqualsSummary="true" />
-                <p:dataTable id="statistica" var="st" value="#{statisticaOrdinisBean.statisticaOrdinis}" editable="true" editMode="cell" widgetVar="cellStatistica">
-
-
-               <!--     <p:ajax event="cellEdit" listener="#{statisticaOrdinisBean.onCellEdit}" update=":formtDataCirco:msgsformtDataCirco" />-->
-
-
-                    <!-- Start Header -->
-
-                    <p:columnGroup type="header">
-                        <p:row>
-                            <p:column rowspan="3" headerText="Circoscrizione" style="width: 15%; text-align: center"/>
-                            <p:column colspan="5" headerText="PROFESSI PERPETUI" />
-                            <p:column colspan="4" headerText="PROFESSI TEMPORANEI" />
-                            <p:column colspan="3" headerText="NON PROFESSI" />
-                        </p:row>
-
-                        <p:row>
-                            <p:column headerText="Episcopi" />
-                            <p:column headerText="Sacerdotes" />
-                            <p:column headerText="Diaconi permanentes" />
-                            <p:column headerText="Diaconi transeuntes" />
-                            <p:column headerText="Laici" />
-
-                            <p:column headerText="Sacerdotes" />
-                            <p:column headerText="Diaconi permanentes" />
-                            <p:column headerText="Diaconi transeuntes" />
-                            <p:column headerText="Laici" />
-
-
-                            <!-- NON PROFESSI -->
-                            <p:column headerText="Novicii" />
-                            <p:column headerText="Postulantes" />
-                            <p:column headerText="Tertiarii perpetui" />
-
-                        </p:row>
-                    </p:columnGroup>
-
-                    <!-- Start Header -->
-
-
-
-                    <p:column headerText="Circoscrizione" style="width: 20%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.circoscrizioni}" /></f:facet>
-                            <f:facet name="input">
-                                <p:selectOneMenu value="#{st.circoscrizioni}" style="width:100%"  filter = "true" filterMatchMode = "startsWith" >
-                                    <f:selectItems value="#{circoscrizioniBean.circoscrizionis}" var="circoscrizioni" itemLabel="#{circoscrizioni}" itemValue="#{circoscrizioni.idCircoscrizione}" />
-                                </p:selectOneMenu>
-
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Episcopi" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.episcopi}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="modelInput" value="#{st.episcopi}" style="width:96%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Sacerdotes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.sacerdotiProfPerp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.sacerdotiProfPerp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Diaconi permanenti" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.diacPermProfPerp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.diacPermProfPerp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Diaconi transeuntes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.diacTransProfPerp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.diacTransProfPerp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Laici" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.laiciProfPerp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.laiciProfPerp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <!-- PROFESSI TEMPORANEI-->
-                    <p:column headerText="Sacerdotes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.sacerdotiProfTemp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.sacerdotiProfTemp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Diaconi permanentes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.diacPermProfTemp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.diacPermProfTemp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Diaconi transeuntes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.diacTransProfTemp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.diacTransProfTemp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-
-                    <p:column headerText="Laici" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.laiciProfTemp}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.laiciProfTemp}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <!-- NON PROFESSI -->
-
-                    <p:column headerText="Novicii" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.novicii}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.novicii}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Postulantes" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.postulantes}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.postulantes}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:column headerText="Tertiarii perpetui" style="width: 10%; text-align: center">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{st.tertiariiPerpetui}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{st.tertiariiPerpetui}" style="width:96%" label="Year"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-
-                    <p:columnGroup type="footer">
-                        <p:row>
-                            <p:column colspan="1" style="text-align:right" footerText="Totals:" />
-                            <p:column footerText="#{statisticaOrdinisBean.episcopiPerpetui}" />
-                            <p:column footerText="#{statisticaOrdinisBean.sacerdotesPerpetui}" />
-                            <p:column footerText="#{statisticaOrdinisBean.diaconiPermanentePerpetui}" />
-                            <p:column footerText="#{statisticaOrdinisBean.diaconiTranseuntesPerpetui}" />
-                            <p:column footerText="#{statisticaOrdinisBean.laiciPerpetui}" />
-                            <!-- Temporanei -->
-                            <p:column footerText="#{statisticaOrdinisBean.sacerdotesTemporanei}" />
-                            <p:column footerText="#{statisticaOrdinisBean.diaconiPermanenteTemporanei}" />
-                            <p:column footerText="#{statisticaOrdinisBean.diaconiTranseuntesTemporanei}" />
-                            <p:column footerText="#{statisticaOrdinisBean.laiciTemporanei}" />
-                            <!-- Non professi -->
-                            <p:column footerText="#{statisticaOrdinisBean.novicii}" />
-                            <p:column footerText="#{statisticaOrdinisBean.postulantes}" />
-                            <p:column footerText="#{statisticaOrdinisBean.tertiariiPerpetui}" />
-                        </p:row>
-                    </p:columnGroup>
-
-                </p:dataTable>
-
-                <p:contextMenu for="statistica" widgetVar="cMenu">   
-                    <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellStatistica').showCellEditor();return false;"/>  
-                    <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
-                </p:contextMenu> 
-                </h:form>
-
-             
-
-
-            </p:tab>
-
-        </p:tabView>
 
 
 
 
+                </p:tab>
+
+                <!-- FILTER TAB -->
+
+                <p:tab title="Filter" id="tabFilter">
+
+                    <p:growl id="msgsfilter" showDetail="true" skipDetailIfEqualsSummary="true" />
+                    <h:panelGrid columns="2">
+                        <h:panelGrid cellspacing="4" columns="2">
+                            <p:outputLabel value="Circoscrizione:" style="font-size: 2em;"/>
+                            <p:outputLabel id="circNome" value="#{loginCDIBean.userLoged.user.circoscrizioni}" style="font-size: 2em;"/>
+                        </h:panelGrid>
+                        <p:calendar value="#{loginCDIBean.date}" pattern="dd/MM/yyyy">
+                            <p:ajax event="dateSelect" listener="#{loginCDIBean.onDateSelect}" update="msgsfilter :form:tabViewData:dataTablestatisticaFilter" />
+                        </p:calendar>
+                        <h:inputHidden id="circo" value="#{loginCDIBean.userLoged.user.circoscrizioni.idCircoscrizione}"/>
+                    </h:panelGrid>
+
+
+
+                    <p:dataTable id="dataTablestatisticaFilter" var="st" value="#{loginCDIBean.statisticaOrdinisCircoscrizionisByYears}"  widgetVar="cellStatistica">
+
+                        <!-- Start Header -->
+
+                        <p:columnGroup type="header">
+                            <p:row>
+                                <p:column rowspan="3" headerText="Circoscrizione" style="width: 15%; text-align: center"/>
+                                <p:column rowspan="3" headerText="Anno" style="width: 15%; text-align: center"/>
+                                <p:column colspan="5" headerText="PROFESSI PERPETUI" />
+                                <p:column colspan="4" headerText="PROFESSI TEMPORANEI" />
+                                <p:column colspan="3" headerText="NON PROFESSI" />
+                            </p:row>
+
+                            <p:row>
+                                <p:column headerText="Episcopi" />
+                                <p:column headerText="Sacerdotes" />
+                                <p:column headerText="Diaconi permanentes" />
+                                <p:column headerText="Diaconi transeuntes" />
+                                <p:column headerText="Laici" />
+
+                                <p:column headerText="Sacerdotes" />
+                                <p:column headerText="Diaconi permanentes" />
+                                <p:column headerText="Diaconi transeuntes" />
+                                <p:column headerText="Laici" />
+
+
+                                <!-- NON PROFESSI -->
+                                <p:column headerText="Novicii" />
+                                <p:column headerText="Postulantes" />
+                                <p:column headerText="Tertiarii perpetui" />
+
+                            </p:row>
+                        </p:columnGroup>
+
+                        <!-- Start Header -->
+
+
+
+                        <p:column headerText="Circoscrizione" style="width: 20%; text-align: center">
+                            <h:outputText value="#{st.circoscrizioni.idCircoscrizione}" />
+                        </p:column>
+                        <p:column headerText="Anno" style="width: 20%; text-align: center">
+                            <h:outputText value="#{st.anno}" />
+                        </p:column>
+
+                        <p:column headerText="Episcopi" style="width: 10%; text-align: center">
+                            <h:outputText value="#{st.episcopi}" />
+
+                        </p:column>
+
+                        <p:column headerText="Sacerdotes" style="width: 10%; text-align: center">
+
+                            <h:outputText value="#{st.sacerdotiProfPerp}" />
+
+                        </p:column>
+
+                        <p:column headerText="Diaconi permanenti" style="width: 10%; text-align: center">
+                            <h:outputText value="#{st.diacPermProfPerp}" />
+
+                        </p:column>
+
+                        <p:column headerText="Diaconi transeuntes" style="width: 10%; text-align: center">
+                            <h:outputText value="#{st.diacTransProfPerp}" />
+
+                        </p:column>
+                        <p:column headerText="Laici" style="width: 10%; text-align: center">
+                            <h:outputText value="#{st.laiciProfPerp}" />
+
+                        </p:column>
+                        <!-- PROFESSI TEMPORANEI-->
+                        <p:column headerText="Sacerdotes" style="width: 10%; text-align: center">
+                            <h:outputText value="#{st.sacerdotiProfTemp}" />
+
+                        </p:column>
+
+                        <p:column headerText="Diaconi permanentes" style="width: 10%; text-align: center">
+                            <h:outputText value="#{st.diacPermProfTemp}" />
+
+                        </p:column>
+
+                        <p:column headerText="Diaconi transeuntes" style="width: 10%; text-align: center">
+                            <h:outputText value="#{st.diacTransProfTemp}" />
+
+                        </p:column>
+
+
+                        <p:column headerText="Laici" style="width: 10%; text-align: center">
+                            <h:outputText value="#{st.laiciProfTemp}" />
+
+                        </p:column>
+
+                        <!-- NON PROFESSI -->
+
+                        <p:column headerText="Novicii" style="width: 10%; text-align: center">
+
+                            <h:outputText value="#{st.novicii}" style="width:96%" />
+                        </p:column>
+
+                        <p:column headerText="Postulantes" style="width: 10%; text-align: center">
+
+                            <h:outputText value="#{st.postulantes}" style="width:96%" />
+
+                        </p:column>
+
+                        <p:column headerText="Tertiarii perpetui" style="width: 10%; text-align: center">
+
+                            <h:outputText value="#{st.tertiariiPerpetui}" style="width:96%" />
+
+                        </p:column>
+
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="1" style="text-align:right" footerText="Totals:" />
+                                <p:column footerText="#" />
+                                <p:column footerText="#{statisticaOrdinisBean.episcopiPerpetui}" />
+                                <p:column footerText="#{statisticaOrdinisBean.sacerdotesPerpetui}" />
+                                <p:column footerText="#{statisticaOrdinisBean.diaconiPermanentePerpetui}" />
+                                <p:column footerText="#{statisticaOrdinisBean.diaconiTranseuntesPerpetui}" />
+                                <p:column footerText="#{statisticaOrdinisBean.laiciPerpetui}" />
+                                <!-- Temporanei -->
+                                <p:column footerText="#{statisticaOrdinisBean.sacerdotesTemporanei}" />
+                                <p:column footerText="#{statisticaOrdinisBean.diaconiPermanenteTemporanei}" />
+                                <p:column footerText="#{statisticaOrdinisBean.diaconiTranseuntesTemporanei}" />
+                                <p:column footerText="#{statisticaOrdinisBean.laiciTemporanei}" />
+                                <!-- Non professi -->
+                                <p:column footerText="#{statisticaOrdinisBean.novicii}" />
+                                <p:column footerText="#{statisticaOrdinisBean.postulantes}" />
+                                <p:column footerText="#{statisticaOrdinisBean.tertiariiPerpetui}" />
+                            </p:row>
+                        </p:columnGroup>
+
+                    </p:dataTable>
+                </p:tab>
+
+            </p:tabView>
+
+
+
+
+
+
+
+        </h:form>
     </h:body>
 </html>
 

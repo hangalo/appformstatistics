@@ -106,14 +106,14 @@ public class LoginCDIBean implements Serializable {
         Date dt = (Date) event.getObject();
 
         UIViewRoot view = FacesContext.getCurrentInstance().getViewRoot();
-        UIComponent component = view.findComponent(":formDataCirsco:circo");
-        // Integer idCircoscrizione = Integer.parseInt(component.getAttributes().get("value").toString());
+        UIComponent component = view.findComponent(":form:tabViewData:circo");
+       Integer idCircoscrizione = Integer.parseInt(component.getAttributes().get("value").toString());
         statisticaOrdinisCircoscrizionisByYears = statisticaDAO.findByAnno(DateUtil.getYearOfDate(dt));
-        //      statisticaOrdinisCircoscrizionisByYears = statisticaDAO.findByAnnoCircoDomicilio(DateUtil.getYearOfDate(dt), idCircoscrizione);
+     statisticaOrdinisCircoscrizionisByYears = statisticaDAO.findByAnnoCircoDomicilio(DateUtil.getYearOfDate(dt), idCircoscrizione);
 
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Anno >>>", DateUtil.getYearOfDate(dt).toString()));
-        // facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ID Circoscrizon >>>", String.valueOf(idCircoscrizione)));
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ID Circoscrizon >>>", String.valueOf(component)));
+     facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ID Circoscrizon >>>", String.valueOf(idCircoscrizione)));
+       /// facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ID CircoscrizonHTML >>>", String.valueOf(component)));
     }
 
     public List<StatisticaOrdinis> getStatisticaOrdinisCircoscrizionisByYears() {
