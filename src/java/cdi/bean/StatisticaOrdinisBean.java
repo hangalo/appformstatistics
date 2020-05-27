@@ -29,6 +29,7 @@ import org.primefaces.event.RowEditEvent;
 public class StatisticaOrdinisBean implements Serializable {
 
     private List<StatisticaOrdinis> statisticaOrdinis = new ArrayList<>();
+     private List<StatisticaOrdinis> statisticaNewOrdinis = new ArrayList<>();
     StatisticaDAO dao = new StatisticaDAO();
     
     @PostConstruct
@@ -43,6 +44,14 @@ public class StatisticaOrdinisBean implements Serializable {
 
     public void setStatisticaOrdinis(List<StatisticaOrdinis> statisticaOrdinis) {
         this.statisticaOrdinis = statisticaOrdinis;
+    }
+
+    public List<StatisticaOrdinis> getStatisticaNewOrdinis() {
+        return statisticaNewOrdinis;
+    }
+
+    public void setStatisticaNewOrdinis(List<StatisticaOrdinis> statisticaNewOrdinis) {
+        this.statisticaNewOrdinis = statisticaNewOrdinis;
     }
     
     

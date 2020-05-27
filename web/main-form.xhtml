@@ -49,21 +49,8 @@
             <h:form id="header" >
                 <p:outputLabel for="menu"/>
                 <br/>
-                <h:panelGrid columns="4">
-                    <p:inputText/>
-                    <p:selectOneMenu id="menu" value="#{itemsBean.selectedItem}" styleClass="ui-selectonemenu">
-                        <f:selectItem itemLabel="Select One Item"/>
-                        <f:selectItems value="#{itemsBean.items}"/>
-                        <p:ajax event="itemSelect" update=":selectedItemText"/>
-                    </p:selectOneMenu>
-
-
-
-                    <p:selectOneMenu id="menu1" value="#{itemsBean.selectedItem}" styleClass="ui-selectonemenu">
-                        <f:selectItem itemLabel="Select One Item"/>
-                        <f:selectItems value="#{itemsBean.items}"/>
-                        <p:ajax event="itemSelect" update=":selectedItemText"/>
-                    </p:selectOneMenu>
+                
+                
 
 
                 </h:panelGrid>
@@ -71,7 +58,7 @@
         </div>
 
 
-        <h:outputText id="selectedItemText" value="#{itemsBean.selectedItem}"/>
+      
 
         <h:form id="form">
             <p:growl id="msgs" showDetail="true"/>
