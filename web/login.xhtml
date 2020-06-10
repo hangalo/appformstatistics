@@ -2,29 +2,58 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" >
     <h:head>
-        <title>Facelet Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"/>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" />
+        <h:outputStylesheet library="css" name="login.css"/>
+        <title>Login Page</title>
     </h:head>
     <h:body>
-        <h:form>
-            <p:messages id="msgs" showDetail="true" showSummary="true" />
-            <h:panelGrid columns="2">
-                <p:outputLabel for="usernameInput" value="User name:"/>
-                <p:inputText id="usernameInput" value="#{loginCDIBean.unsername}"   required="true" />
-
-                <p:outputLabel for="passwordInput" value="Password"/>
-                <p:password id="passwordInput" value="#{loginCDIBean.password}"  required="true" />
-               
-                 <p:outputLabel  value="Circoscrizione"/>
-                 <p:selectOneMenu value="#{loginCDIBean.circoscrizioni.idCircoscrizione}" style="width:100%"  filter = "true" filterMatchMode = "startsWith" >
-                    <f:selectItems value="#{circoscrizioniBean.circoscrizionis}" var="circoscrizioni" itemLabel="#{circoscrizioni}" itemValue="#{circoscrizioni.idCircoscrizione}" />
-                </p:selectOneMenu>
-            </h:panelGrid>
-            <p:commandButton value="Login" action="#{loginCDIBean.validateUsernamePassword()}" ajax="false"  update="msgs"/>
-        </h:form>
-
+        <h:panelGroup id="loginContainer" layout="block" class="container">
+            <h:panelGroup id="loginCard" layout="block" class="card card-shadow border-0">
+                <h:panelGroup id="firstRow" layout="block" class="row d-flex">
+                    <h:panelGroup id="firstColumn" layout="block" class="col-lg-6">
+                        <div class="pb-5">
+                            <div class="row"> <h:graphicImage library="images" name="logo-ofmcap.png" class="logo-curia"/></div>
+                            <div class="row px-3 justify-content-center mt-4 mb-4 gradient-border"> <h:graphicImage library="images" name="statistics image.png" class="image"/> </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup id="secondColumn" layout="block" class="col-lg-6">
+                        <h:panelGroup id="loginOuterForm" layout="block" class="pb-5">
+                            <div class="row d-flex flex-row-reverse"><h:graphicImage library="images" name="Immagine.png" class="logo-office"/> </div>
+                            <div id="loginForm"  class="card-margin px-5 py-5">
+                                <h:form>
+                                    <div class="row px-3"> <label class="mb-1">
+                                            <h6 class="mb-0 text-sm">Email Address</h6>
+                                        </label> <h:inputText id="email" class="mb-4" value="" a:name="email" a:placeholder="Enter a valid email address" /> </div>
+                                    <div class="row px-3"> <label class="mb-1">
+                                            <h6 class="mb-0 text-sm">Password</h6>
+                                        </label> <h:inputSecret a:name="password" a:placeholder="Enter password"/> </div>
+                                    <div class="row px-3 mb-4">
+                                        <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"/> <label for="chk1" class="custom-control-label text-sm">Remember me</label> </div> <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+                                    </div>
+                                    <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Login</button> </div>
+                                </h:form>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup id="secondRow" layout="block" class="bg-blue py-4">
+                    <div class="row px-2 d-flex"> 
+                        <div class="col-6">
+                            <small class="ml-4 ml-sm-5"> All rights reserved. </small>   
+                        </div>
+                        <div class="col-6 d-flex flex-row-reverse">
+                            <small class="mr-4 mr-sm-5"> capsoft&copy;2020 </small>   
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
     </h:body>
 </html>
 
