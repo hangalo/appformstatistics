@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import jdbcutil.DBConnection;
+import model.Nazione;
 import model.StatisticaOrdinis;
 
 /**
@@ -52,7 +53,13 @@ public class StatisticaDAO {
             + "FROM statistica_ordinis WHERE ID_CircoAppartenenza = ? ";
 
     String LIST_CIRCOSCRIZIONI = "SELECT ID_Circoscrizione, Nome_latino, Nome_Italiano FROM circoscrizioni WHERE Soppressa !=1 order by Nome_Italiano";
+    
+    String LIST_Nazione = "SELECT ID_Nazione, Nazione_latino, Nazione_italiano FROM nazioni order by Nome_Italiano";
 
+   
+   
+    
+    
     public void save(StatisticaOrdinis st) {
         PreparedStatement ps = null;
         Connection conn = null;
@@ -219,6 +226,32 @@ public class StatisticaDAO {
         return circoscrizionis;
     }
 
+    
+     public List<Nazione> findAllNazioni() {
+        PreparedStatement ps = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        List<Nazione> naziones = new ArrayList<>();
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(LIST_CIRCOSCRIZIONI);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Nazione nazione = new Nazione();
+                fillDataNazioni(nazione, rs);
+                naziones.add(nazione);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
+        } finally {
+            DBConnection.closeConnection(conn);
+        }
+        return naziones;
+    }
+    
+    
+    
     private void fillData(StatisticaOrdinis statistica, ResultSet rs) {
         try {
               
@@ -267,4 +300,16 @@ public class StatisticaDAO {
         }
     }
 
+    
+    
+      private void fillDataNazioni(Nazione nazione, ResultSet rs) {
+        try {
+            nazione.setIdNazione(rs.getInt(1));
+            nazione.setNomeItaliano(rs.getString(2));
+            nazione.setNomeLatino(rs.getString(3));
+
+        } catch (SQLException ex) {
+            System.err.println("Error:fillDataNazione: " + ex.getLocalizedMessage());
+        }
+    }
 }

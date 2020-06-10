@@ -20,7 +20,7 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class ItemsBean implements Serializable{
 
-       private List<String> items = new ArrayList<>();
+  private List<String> items = new ArrayList<>();
   private String selectedItem;
     
     public ItemsBean() {

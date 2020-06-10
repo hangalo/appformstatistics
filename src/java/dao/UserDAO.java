@@ -20,15 +20,17 @@ import model.User;
 public class UserDAO {
 
     String FINDUSER = "SELECT id_user, login, password, nome, cognome, c.id_circoscrizione, c.Nome_latino, c.Nome_Italiano FROM user u INNER JOIN circoscrizioni c ON u.id_circoscrizioni = c.ID_Circoscrizione WHERE login =? AND password = ?";
-    // String FINDUSER = "SELECT id_user, login, password, nome, cognome FROM user  WHERE login = ? AND password = ?";
+   
 
     public static boolean validate(String user, String password) {
         Connection con = null;
         PreparedStatement ps = null;
-
+        System.err.println(">>>>>>>>>>>>>>>>>>>" +user + "P>>>>>"+password);
         try {
             con = DBConnection.getConnection();
             ps = con.prepareStatement("SELECT id_user, login, password, nome, cognome, c.id_circoscrizione, c.Nome_latino, c.Nome_Italiano FROM user u INNER JOIN circoscrizioni c ON u.id_circoscrizioni = c.ID_Circoscrizione WHERE login =? AND password = ?");
+            
+            
             ps.setString(1, user);
             ps.setString(2, password);
 

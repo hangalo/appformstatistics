@@ -125,7 +125,7 @@ public class LoginCDIBean implements Serializable {
     }
 
     public String validateUsernamePassword() {
-
+        System.out.println(">>>>>>>>>>>>>>USER"+unsername +">>>>>>>>>>>>>>>>PASS"+password);
         boolean valid = userDAO.validate(unsername, password);
 
         if (valid) {
