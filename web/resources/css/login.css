@@ -1,0 +1,142 @@
+/* 
+    Created on : 4-giu-2020, 17.12.53
+    Author     : viceeconomo
+*/
+html,
+body {
+    height: 100vh;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0
+}
+body {
+    background-color: #BAC8CF;    
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.card-shadow {
+    box-shadow: 9px 18px 27px -5px rgba(0,0,0,0.52);
+    border-radius: 0px
+}
+.card-margin {
+    margin: 0px 40px
+}
+.logo-curia {
+    width: 220px;
+    height: 70px;
+    margin-top: 20px;
+    margin-left: 35px
+}
+.logo-office {
+    width: 220px;
+    height: 70px;
+    margin-top: 20px;
+    margin-right: 35px
+}
+.image {
+    width: 360px;
+    height: 280px
+}
+.gradient-border {
+    border: 1.5px solid;
+    border-top: 0;
+    border-bottom: 0; 
+    border-left: 0;
+    border-image: linear-gradient(to bottom, rgba(0,212,255,0) 0%, rgba(9,9,121,1)50%, rgba(0,212,255,0) 100%);
+    border-image-slice: 1;
+}
+.bg-blue {
+    color: #fff;
+    background-color: #1A237E
+}
+.text-sm {
+    font-size: 14px !important
+}
+::placeholder {
+    color: #BDBDBD;
+    opacity: 1;
+    font-weight: 300
+}
+:-ms-input-placeholder {
+    color: #BDBDBD;
+    font-weight: 300
+}
+::-ms-input-placeholder {
+    color: #BDBDBD;
+    font-weight: 300
+}
+input,
+textarea {
+    padding: 10px 12px 10px 12px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 14px;
+    letter-spacing: 1px
+}
+input:focus,
+textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #304FFE;
+    outline-width: 0
+}
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0
+}
+.btn-blue {
+    background-color: #1A237E;
+    width: 150px;
+    color: #fff;
+    border-radius: 2px
+}
+.btn-blue:hover {
+    background-color: #304FFE ;
+    color: #fff;
+    cursor: pointer
+}
+a {
+    color: inherit;
+    cursor: pointer
+}
+@media screen and (max-width: 991px) {
+    .logo-curia {
+        height: 50px;
+        width: 160px;
+    }
+    .image {
+        width: 280px;
+        height: 170px;
+        margin-bottom: 30px;
+    }
+    .logo-office {
+        width: 160px;
+        height: 50px;
+        margin-top: -50px;
+    }
+    .gradient-border {
+        border: 1.5px solid;
+        border-top: 0;
+        border-right: 0; 
+        border-left: 0;
+        border-image: linear-gradient(to right, rgba(0,212,255,0) 20%, rgba(9,9,121,1)50%, rgba(0,212,255,0) 80%);
+        border-image-slice: 1;
+    }
+    .card-margin {
+        margin: 0px 2px
+    }
+    #loginForm {
+        margin-top: -40px;
+        margin-bottom: -40px;
+    }
+    
+}
