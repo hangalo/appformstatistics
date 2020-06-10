@@ -2,8 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" 
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
@@ -28,7 +27,7 @@
                             <div class="row d-flex flex-row-reverse"><h:graphicImage library="images" name="logo-office.png" class="logo-office"/> </div>
                             <div id="loginForm"  class="card-margin px-5 py-5">
                                 <h:form>
-                                    <p:messages id="msgs" showDetail="true" showSummary="true" />
+                                    <h:messages id="msgs" showDetail="true" showSummary="true" />
                                     <div class="row px-3"> <label class="mb-1">
                                             <h6 class="mb-0 text-sm">User Name</h6>
                                         </label> <h:inputText id="usernameInput" class="mb-4" value="#{loginCDIBean.unsername}" a:placeholder="Enter your user name" required="true" /> </div>
@@ -38,7 +37,7 @@
                                     <div class="row px-3 mb-4">
                                         <div class="custom-control custom-checkbox custom-control-inline"> <input id="chk1" type="checkbox" name="chk" class="custom-control-input"/> <label for="chk1" class="custom-control-label text-sm">Remember me</label> </div> <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
                                     </div>
-                                    <div class="row mb-3 px-3"> <p:commandButton value="Login" action="#{loginCDIBean.validateUsernamePassword()}" ajax="false"  update="msgs" class="btn btn-blue text-center" /></div>
+                                    <div class="row mb-3 px-3"> <h:commandButton value="Login" action="#{loginCDIBean.validateUsernamePassword()}" class="btn-blue-login text-center" /> </div>
                                 </h:form>
                             </div>
                         </h:panelGroup>

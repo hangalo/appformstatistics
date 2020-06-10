@@ -93,13 +93,13 @@ button:focus {
     box-shadow: none !important;
     outline-width: 0
 }
-.btn-blue {
+.btn-blue-login {
     background-color: #1A237E;
     width: 150px;
     color: #fff;
     border-radius: 2px
 }
-.btn-blue:hover {
+.btn-blue-login:hover {
     background-color: #304FFE ;
     color: #fff;
     cursor: pointer
