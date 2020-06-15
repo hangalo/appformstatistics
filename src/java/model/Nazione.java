@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.Objects;
+
 /**
  *
  * @author informatica
@@ -43,6 +45,34 @@ public class Nazione {
         this.nomeItaliano = nomeItaliano;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.idNazione);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Nazione other = (Nazione) obj;
+        if (!Objects.equals(this.idNazione, other.idNazione)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
+    
     @Override
     public String toString() {
         return this.nomeLatino;

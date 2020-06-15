@@ -32,34 +32,30 @@ public class StatisticaDAO {
 
     String INSERT = "INSERT INTO statistica_ordinis(ID_Statistica, Anno, Corrente, ID_CircoDomicilio, Tipo_Appartenenza, ID_CircoAppartenenza, ID_Nazione, Domii, Episcopi, Sacerdoti_ProfPerp, Sacerdoti_ProfTemp, DiacPerm_ProfPerp, DiacPerm_ProfTemp, DiacTrans_ProfPerp,DiacTrans_ProfTemp,Laici_ProfPerp,Laici_ProfTemp,Novicii,Postulantes,Tertiarii_Perpetui,Seminaristi)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-    String VIEW_BY_ANNO_CIRCODOMICILIO= "SELECT ID_Statistica, Anno, Corrente,ID_CircoDomicilio, Tipo_Appartenenza, ID_CircoAppartenenza,"
+    String VIEW_BY_ANNO_CIRCODOMICILIO = "SELECT ID_Statistica, Anno, Corrente,ID_CircoDomicilio, Tipo_Appartenenza, ID_CircoAppartenenza,"
             + " ID_Nazione,Domii, Episcopi, Sacerdoti_ProfPerp, Sacerdoti_ProfTemp,DiacPerm_ProfPerp,DiacPerm_ProfTemp,"
             + " DiacTrans_ProfPerp, DiacTrans_ProfTemp, Laici_ProfPerp, Laici_ProfTemp, Novicii, Postulantes, "
             + "Tertiarii_Perpetui, Seminaristi "
             + "FROM statistica_ordinis"
             + " WHERE Anno = ? AND ID_CircoDomicilio = ? ";
-    
-     String VIEW_BY_ANNO = "SELECT ID_Statistica, Anno, Corrente,ID_CircoDomicilio, Tipo_Appartenenza, ID_CircoAppartenenza,"
+
+    String VIEW_BY_ANNO = "SELECT ID_Statistica, Anno, Corrente,ID_CircoDomicilio, Tipo_Appartenenza, ID_CircoAppartenenza,"
             + " ID_Nazione,Domii, Episcopi, Sacerdoti_ProfPerp, Sacerdoti_ProfTemp,DiacPerm_ProfPerp,DiacPerm_ProfTemp,"
             + " DiacTrans_ProfPerp, DiacTrans_ProfTemp, Laici_ProfPerp, Laici_ProfTemp, Novicii, Postulantes, "
             + "Tertiarii_Perpetui, Seminaristi "
             + "FROM statistica_ordinis"
             + " WHERE Anno = ? ";
-    
-     String VIEW_BY_CIRCODOMICILIO  = "SELECT ID_Statistica, Anno, Corrente,ID_CircoDomicilio, Tipo_Appartenenza, ID_CircoAppartenenza,"
+
+    String VIEW_BY_CIRCODOMICILIO = "SELECT ID_Statistica, Anno, Corrente,ID_CircoDomicilio, Tipo_Appartenenza, ID_CircoAppartenenza,"
             + " ID_Nazione,Domii, Episcopi, Sacerdoti_ProfPerp, Sacerdoti_ProfTemp,DiacPerm_ProfPerp,DiacPerm_ProfTemp,"
             + " DiacTrans_ProfPerp, DiacTrans_ProfTemp, Laici_ProfPerp, Laici_ProfTemp, Novicii, Postulantes, "
             + "Tertiarii_Perpetui, Seminaristi "
             + "FROM statistica_ordinis WHERE ID_CircoAppartenenza = ? ";
 
     String LIST_CIRCOSCRIZIONI = "SELECT ID_Circoscrizione, Nome_latino, Nome_Italiano FROM circoscrizioni WHERE Soppressa !=1 order by Nome_Italiano";
-    
-    String LIST_Nazione = "SELECT ID_Nazione, Nazione_latino, Nazione_italiano FROM nazioni order by Nome_Italiano";
 
-   
-   
-    
-    
+    String LIST_NAZIONI = "SELECT ID_Nazione, Nazione_latino, Nazione_italiano FROM nazioni order by Nazione_italiano";
+
     public void save(StatisticaOrdinis st) {
         PreparedStatement ps = null;
         Connection conn = null;
@@ -70,10 +66,10 @@ public class StatisticaDAO {
         try {
             conn = DBConnection.getConnection();
             ps = conn.prepareStatement(INSERT);
-           
+
             ps.setInt(1, st.getAnno());
             ps.setBoolean(2, st.getCorrente());
-         //   ps.setInt(3, st.getIdCircoDomicilio());
+            //   ps.setInt(3, st.getIdCircoDomicilio());
             ps.setString(4, st.getTipoAppartenenza());
             ps.setInt(5, st.getiDCircoAppartenenza());
             ps.setInt(6, st.getIdNazione());
@@ -125,11 +121,9 @@ public class StatisticaDAO {
         }
         return statisticaOrdinis;
     }
-    
-    
-     public List<StatisticaOrdinis> findByAnno(Integer anno) {
-         
-        
+
+    public List<StatisticaOrdinis> findByAnno(Integer anno) {
+
         PreparedStatement ps = null;
         Connection conn = null;
         ResultSet rs = null;
@@ -138,7 +132,7 @@ public class StatisticaDAO {
             conn = DBConnection.getConnection();
             ps = conn.prepareStatement(VIEW_BY_ANNO);
             ps.setInt(1, anno);
-              rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 StatisticaOrdinis statisticaOrdini = new StatisticaOrdinis();
                 fillData(statisticaOrdini, rs);
@@ -152,9 +146,8 @@ public class StatisticaDAO {
         }
         return statisticaOrdinis;
     }
-    
-    
-     public List<StatisticaOrdinis> findByCircoDomicilio(Integer circoDomicilio) {
+
+    public List<StatisticaOrdinis> findByCircoDomicilio(Integer circoDomicilio) {
 
         PreparedStatement ps = null;
         Connection conn = null;
@@ -178,7 +171,6 @@ public class StatisticaDAO {
         }
         return statisticaOrdinis;
     }
-
 
     public List<StatisticaOrdinis> findAll() {
         PreparedStatement ps = null;
@@ -226,15 +218,14 @@ public class StatisticaDAO {
         return circoscrizionis;
     }
 
-    
-     public List<Nazione> findAllNazioni() {
+    public List<Nazione> findAllNazioni() {
         PreparedStatement ps = null;
         Connection conn = null;
         ResultSet rs = null;
         List<Nazione> naziones = new ArrayList<>();
         try {
             conn = DBConnection.getConnection();
-            ps = conn.prepareStatement(LIST_CIRCOSCRIZIONI);
+            ps = conn.prepareStatement(LIST_NAZIONI);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Nazione nazione = new Nazione();
@@ -243,27 +234,22 @@ public class StatisticaDAO {
             }
 
         } catch (SQLException ex) {
-            System.err.println("Erro ao ler dados: " + ex.getLocalizedMessage());
+            System.err.println("Error on data read: StatisticaDAO:findAllNazione: " + ex.getLocalizedMessage());
         } finally {
             DBConnection.closeConnection(conn);
         }
         return naziones;
     }
-    
-    
-    
+
     private void fillData(StatisticaOrdinis statistica, ResultSet rs) {
         try {
-              
-         
-            
-           // Circoscrizioni c = new Circoscrizioni();
-         //   c.setNomeLatino(rs.getString("c.Nome_latino"));
-            
+
+            // Circoscrizioni c = new Circoscrizioni();
+            //   c.setNomeLatino(rs.getString("c.Nome_latino"));
             statistica.setIdStatistica(rs.getInt("ID_Statistica"));
             statistica.setAnno(rs.getInt("Anno"));
             statistica.setCorrente(rs.getBoolean("Corrente"));
-          //  statistica.setCircoscrizioni(c);
+            //  statistica.setCircoscrizioni(c);
             statistica.setTipoAppartenenza(rs.getString("Tipo_Appartenenza"));
             statistica.setiDCircoAppartenenza(rs.getInt("ID_CircoAppartenenza"));
             statistica.setIdNazione(rs.getInt("ID_Nazione"));
@@ -282,8 +268,6 @@ public class StatisticaDAO {
             statistica.setTertiariiPerpetui(rs.getInt("Tertiarii_Perpetui"));
             statistica.setSeminaristi(rs.getInt("Seminaristi"));
 
-            
-          
         } catch (SQLException ex) {
             System.err.println("Erro ao carregar dados: " + ex.getLocalizedMessage());
         }
@@ -300,9 +284,7 @@ public class StatisticaDAO {
         }
     }
 
-    
-    
-      private void fillDataNazioni(Nazione nazione, ResultSet rs) {
+    private void fillDataNazioni(Nazione nazione, ResultSet rs) {
         try {
             nazione.setIdNazione(rs.getInt(1));
             nazione.setNomeItaliano(rs.getString(2));

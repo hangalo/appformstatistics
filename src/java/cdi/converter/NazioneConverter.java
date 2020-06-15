@@ -12,14 +12,15 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import model.Circoscrizioni;
+import model.Nazione;
 
 /**
  *
  * @author informatica
  */
-@FacesConverter(value = "circoscrizioneConverter")
-public class CircoscrizioneConverter implements Converter{
-     private static Map<String, Circoscrizioni> mapa = new HashMap<String, Circoscrizioni>();
+@FacesConverter(value = "nazioneConverter")
+public class NazioneConverter implements Converter{
+     private static Map<String, Nazione> mapa = new HashMap<String, Nazione>();
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -28,12 +29,12 @@ public class CircoscrizioneConverter implements Converter{
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value instanceof Circoscrizioni) {
-            Circoscrizioni c = (Circoscrizioni) value;
-            mapa.put(String.valueOf(c.getIdCircoscrizione()), c);
-            return String.valueOf(c.getIdCircoscrizione());
+        if (value instanceof Nazione) {
+            Nazione c = (Nazione) value;
+            mapa.put(String.valueOf(c.getIdNazione()), c);
+            return String.valueOf(c.getIdNazione());
         } else {
-            return "Error on converting";
+            return "";
         }
     }
 }

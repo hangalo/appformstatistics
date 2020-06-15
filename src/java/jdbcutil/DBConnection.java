@@ -17,11 +17,12 @@ import java.util.Properties;
  * @author informatica
  */
 public class DBConnection {
-
+/*Class.forName("com.mysql.cj.jdbc.Driver").newInstance();*/
     public static Connection getConnection() {
         Connection con;
-        String driver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://192.168.0.105:3306/statistica";
+       // String driver = "com.mysql.jdbc.Driver";
+       String driver = "com.mysql.cj.jdbc.Driver";
+        String url = "jdbc:mysql://192.168.0.105:3306/statistica?serverTimezone=UTC";
         String user = "root";
         String password = "root";
         try {

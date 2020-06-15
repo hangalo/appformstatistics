@@ -5,6 +5,7 @@
  */
 package cdi.bean;
 
+import dao.FrateDAO;
 import dao.StatisticaDAO;
 import dao.UserDAO;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import jdbcutil.DateUtil;
 import jdbcutil.SessionUtils;
 import model.Circoscrizioni;
+import model.Frate;
 import model.StatisticaOrdinis;
 import model.User;
 import org.primefaces.event.SelectEvent;
@@ -47,9 +49,12 @@ public class LoginCDIBean implements Serializable {
     private Circoscrizioni circoscrizioni = new Circoscrizioni();
     private List<StatisticaOrdinis> statisticaOrdinisCircoscrizionis = new ArrayList<>();
     private List<StatisticaOrdinis> statisticaOrdinisCircoscrizionisByYears = new ArrayList<>();
+   
+    
     boolean valid = false;
     UserDAO userDAO = new UserDAO();
     StatisticaDAO statisticaDAO = new StatisticaDAO();
+    FrateDAO frateDAO = new FrateDAO();
 
     public UserLoged getUserLoged() {
         return userLoged;
@@ -99,6 +104,8 @@ public class LoginCDIBean implements Serializable {
         this.date = date;
     }
 
+   
+
     public void onDateSelect(SelectEvent<Date> event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -131,7 +138,10 @@ public class LoginCDIBean implements Serializable {
         if (valid) {
             user = userDAO.findUser(unsername, password);
 
-            statisticaOrdinisCircoscrizionis = statisticaDAO.findByCircoDomicilio(user.getCircoscrizioni().getIdCircoscrizione());
+           statisticaOrdinisCircoscrizionis = statisticaDAO.findByCircoDomicilio(user.getCircoscrizioni().getIdCircoscrizione());
+         
+        
+            
             userLoged.setUser(user);
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("username", user);

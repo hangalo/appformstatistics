@@ -5,50 +5,83 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Nuovo Frate </title>
     </h:head>
     <h:body>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Nomen"/>
-                <h:inputText value="#{frateCDIBean.frate.nomen}"/>
-                <h:outputLabel value="Cognomen"/>
-                <h:inputText value="#{frateCDIBean.frate.cognomen}"/>
-                <h:outputLabel value="Oppidum et Natio"/>
-                <h:selectOneMenu value = "#"> 
-                    <f:selectItem itemValue = "1" itemLabel = "Item 1" /> 
-                    <f:selectItem itemValue = "2" itemLabel = "Item 2" /> 
-                    <f:selectItem itemValue = "3" itemLabel = "Item 3" /> 
-                    <f:selectItem itemValue = "4" itemLabel = "Item 4" /> 
-                    <f:selectItem itemValue = "5" itemLabel = "Item 5" /> 
-                </h:selectOneMenu> 
-                <h:outputLabel value="Dioecesis"/>
-                <h:inputText value="#{frateCDIBean.frate.dioecesis}"/>
-            
-
-                <p:outputLabel  value="Circoscrizione"/>
-                <p:selectOneMenu value="#{loginCDIBean.circoscrizioni.idCircoscrizione}" style="width:100%"  filter = "true" filterMatchMode = "startsWith" >
-                    <f:selectItems value="#{circoscrizioniBean.circoscrizionis}" var="circoscrizioni" itemLabel="#{circoscrizioni}" itemValue="#{circoscrizioni.idCircoscrizione}" />
-                </p:selectOneMenu>
-
-                <h:outputLabel value="Patris"/>
-                <h:inputText value="#{frateCDIBean.frate.patris}"/>
-                <h:outputLabel value="Matris"/>
-                <h:inputText value="#{frateCDIBean.frate.matris}"/>
-
-                <h:outputLabel value="Nativ."/>
-                <p:calendar value="#{frateCDIBean.frate.nativ}" pattern="dd/MM/yyyy"/>
-                <h:outputLabel value="Vest."/>
-                <p:calendar value="#{frateCDIBean.frate.vest}" pattern="dd/MM/yyyy"/>
-                <h:outputLabel value="P.Temp."/>
-                <p:calendar value="#{frateCDIBean.frate.profTemp}" pattern="dd/MM/yyyy"/>
+        <f:view>
+             <p:outputLabel value="Circoscrizione:" style="font-size: 1.5em;"/>
+             <p:outputLabel id="circNome" value="#{loginCDIBean.userLoged.user.circoscrizioni}" style="font-size: 1.5em;"/>
+             <br/>
+             <hr/>
+            <h:form>
+                
+                 
+                <h:inputHidden id="circo" value="#{loginCDIBean.userLoged.user.circoscrizioni.idCircoscrizione}"/>
+                  
+                <p:growl id="msgs" showDetail="true"/>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Nomen"/>
+                    <h:inputText value="#{frateCDIBean.frate.nomen}"/>
+                    <h:outputLabel value="Cognomen"/>
+                    <h:inputText value="#{frateCDIBean.frate.cognomen}"/>
+                    <h:outputLabel value="Oppidum"/>
+                    <h:inputText value="#{frateCDIBean.frate.oppidum}"/>
+                    <h:outputLabel value="Natio"/>
+                    <p:selectOneMenu id="cbNazioneFrate" value="#{frateCDIBean.frate.nazione }" style="width:100%"  filter = "true" filterMatchMode = "startsWith" converter="nazioneConverter" >
+                        <f:selectItem itemLabel="== Seleziona ==" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{nazioneBean.selectNaziones}"  />
+                    </p:selectOneMenu>
+                    <h:outputLabel value="Dioecesis"/>
+                    <h:inputText value="#{frateCDIBean.frate.dioecesis}"/>
 
 
+                    <p:outputLabel  value="Circoscrizione"/>
+                    <p:selectOneMenu id="cboCircoscrizioneFrate" value="#{frateCDIBean.frate.idCircoscrizione}" style="width:100%"  filter = "true" filterMatchMode = "startsWith"  converter="circoscrizioneConverter">
+                        <f:selectItem itemLabel="== Seleziona ==" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{circoscrizioniBean.selectCircoscrizionis}" />
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Patris"/>
+                    <h:inputText value="#{frateCDIBean.frate.patris}"/>
+                    <h:outputLabel value="Matris"/>
+                    <h:inputText value="#{frateCDIBean.frate.matris}"/>
+
+                    <h:outputLabel value="Nativ."/>
+                    <p:calendar value="#{frateCDIBean.frate.nativ}" pattern="dd/MM/yyyy"/>
+                    <h:outputLabel value="Vest."/>
+                    <p:calendar value="#{frateCDIBean.frate.vest}" pattern="dd/MM/yyyy"/>
+                    <h:outputLabel value="P.Temp."/>
+                    <p:calendar value="#{frateCDIBean.frate.profTemp}" pattern="dd/MM/yyyy"/>
+
+                </h:panelGrid>
+                <p:commandButton action="#{frateCDIBean.save()}" actionListener="#{frateCDIBean.dataTableFrateListener}" value="Save" update="msgs">
+                <f:param name="action" value="delete" />
+                
+                </p:commandButton>
+            </h:form>
 
 
 
-            </h:panelGrid>
-        </h:form>
+            <h:form id="formDataFrate">
+                <h:dataTable id="dataFrate" value="#{frateCDIBean.fratesByCircoscrizione}" var="item">
+                    <h:column>
+
+                        <f:facet name="header">Nome</f:facet>
+                        <!-- row record -->
+                        #{item.nomen}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Cognome</f:facet>
+                            #{item.cognomen}
+                    </h:column>
+
+
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
+
     </h:body>
 </html>
 

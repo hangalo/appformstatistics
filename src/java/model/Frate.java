@@ -16,7 +16,7 @@ public class Frate {
     private Integer idFrate;
     private String nomen;
     private String cognomen;
-    private String oppidum_et_natio;
+    private String oppidum;
     private String dioecesis;
     private String patris;
     private String matris;
@@ -24,6 +24,7 @@ public class Frate {
     private Date vest;
     private Date profTemp;
     private Circoscrizioni idCircoscrizione;
+    private Nazione nazione;
 
     public Frate() {
     }
@@ -52,12 +53,12 @@ public class Frate {
         this.cognomen = cognomen;
     }
 
-    public String getOppidum_et_natio() {
-        return oppidum_et_natio;
+    public String getOppidum() {
+        return oppidum;
     }
 
-    public void setOppidum_et_natio(String oppidum_et_natio) {
-        this.oppidum_et_natio = oppidum_et_natio;
+    public void setOppidum(String oppidum) {
+        this.oppidum = oppidum;
     }
 
     public String getDioecesis() {
@@ -118,6 +119,16 @@ public class Frate {
         this.idCircoscrizione = idCircoscrizione;
     }
 
+    public Nazione getNazione() {
+        return nazione;
+    }
+
+    public void setNazione(Nazione nazione) {
+        this.nazione = nazione;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 3;

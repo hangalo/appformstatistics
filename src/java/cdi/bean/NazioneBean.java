@@ -14,42 +14,41 @@ import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import model.Nazione;
 
 /**
  *
  * @author informatica
  */
-@Named(value = "circoscrizioniBean")
+@Named(value = "nazioneBean")
 @ViewScoped
-public class CircoscrizioniBean implements Serializable{
+public class NazioneBean implements Serializable {
 
-    List<Circoscrizioni> circoscrizionis = new ArrayList<>();
-    
+    List<Nazione> naziones = new ArrayList<>();
+
     StatisticaDAO dao = new StatisticaDAO();
 
     @PostConstruct
     public void postInit() {
-       
+        
     }
 
-    public List<Circoscrizioni> getCircoscrizionis() {
-        return circoscrizionis;
+    public List<Nazione> getNaziones() {
+        return naziones;
     }
 
-    public void setCircoscrizionis(List<Circoscrizioni> circoscrizionis) {
-        this.circoscrizionis = circoscrizionis;
+    public void setNaziones(List<Nazione> naziones) {
+        this.naziones = naziones;
     }
-    
-    
-    
-       public List<SelectItem> getSelectCircoscrizionis() {
+
+    public List<SelectItem> getSelectNaziones() {
         List<SelectItem> items = new ArrayList<>();
-        for (Circoscrizioni c : dao.findAllCircoscrizioni()) {
+        for (Nazione n : dao.findAllNazioni()) {
 
-            items.add(new SelectItem(c, c.getNomeItaliano()));
+            items.add(new SelectItem(n, n.getNomeItaliano()));
         }
 
         return items;
     }
-    
+
 }

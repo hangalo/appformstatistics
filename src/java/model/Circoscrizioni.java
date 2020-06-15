@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.Objects;
+
 /**
  *
  * @author informatica
@@ -41,6 +43,33 @@ public class Circoscrizioni {
         this.nomeItaliano = nomeItaliano;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.idCircoscrizione);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Circoscrizioni other = (Circoscrizioni) obj;
+        if (!Objects.equals(this.idCircoscrizione, other.idCircoscrizione)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
     @Override
     public String toString() {
         return this.nomeLatino;
